@@ -1,0 +1,448 @@
+PROBLEM STATEMENT: 
+Create a program that will display input from the user for a soil profile. Determine 
+if each horizon: O, A, E, B, C, and Parent Rock are present. For each layer prompt 
+the user for the horizon depth, soil type, soil color, and if peds are present and 
+their size. Display each output back to the user.
+
+Nouns: soil profile, horizon, horizon depth, soil type, soil color, peds, ped size, output
+
+Verbs: prompt, for, output
+
+
+DEFINING DIAGRAM
+
+Inputs:
+  horizonLayer
+  horizonLetter
+  horizonA
+  horizonB
+  horizonC
+  horizonE
+  horizonO
+  parentRock
+  peds
+  pedSize
+  pedStructure
+  soilColor
+  soilDepth
+  soilTexture
+  soilType
+
+Processes:
+  create function pedInformation
+    prompt user for pedSize with "Enter the size of the peds in cm."
+    set pedSize to a number
+    WHILE pedSize is not a number
+      alert user to "Please enter a number."
+      prompt user with "Enter the size of the peds in cm."
+      set pedSize to a number
+    ENDWHILE
+    prompt user for pedStructure with "Enter the structure of the peds."
+  ENDFUNCTION
+  
+  create function soilDepthInformation
+    prompt user for soilDepth with "Enter the depth of the horizon in cm.
+    set soilDepth to a number
+    WHILE soilDepth is not a number
+      alert user to "Please enter a number."
+      prompt user for soilDepth with "Enter the depth of the horizon in cm.
+      set soilDepth to a number
+    ENDWHILE
+  ENDFUNCTION
+  
+  create function getLetter from horizons array
+    set horizonLetter to an array
+    FOR all letters in the horizons array
+      use horizonLetter from horizons array and push to horizons
+    ENDFOR
+    return horizonLetter
+  ENDFUNCTION
+  HASH horizons 
+    set horizonAssignment to horizonO, horizonA, horizonE, horizonB, horizonC, parentRock
+    set horizonLetter to "O", "A", "E, "B, "C", and "Parent Rock"
+  ENDHASH
+  FOR all letters in horizons
+    set horizonLetter to getLetter from horizons
+    prompt user for horizonLetter with "Is the " + horizonLetter[index] + 
+      " horizon present?\nPlease enter \"yes\" or \"no\".");
+    IF horizonLayer is "yes" or "y"
+      use soilDepthInformation function
+      prompt user for soilType with "Enter the soil type."
+      prompt user for peds with "Are peds present?\nPlease enter \"yes\" or \"no\"."
+      IF peds are "yes" or "y"
+        use pedInformation function
+      ELSE
+        alert the user "Thank you. Select \"OK\" to continue."
+      ENDIF
+      prompt user for soilColor with "Enter the soil color."
+
+Outputs:
+  horizonLetter[index]
+  output
+  pedSize
+  pedStructure
+  soilDepth
+  soilType
+  soilColor
+
+  
+PSUEDOCODE:
+
+displaySoilHorizons
+  set horizonLayer = "";
+  set horizonLetter = [];
+  set horizonA = [];
+  set horizonB = [];
+  set horizonC = [];
+  set horizonE = [];
+  set horizonO = [];
+  set output = "";
+  set parentRock = [];
+  set peds = "";
+  set pedSize = 0;
+  set pedStructure = "";
+  set soilColor = "";
+  set soilDepth = 0;
+  set soilTexture = "";
+  set soilType = "";
+
+  create function pedInformation
+    prompt user for pedSize with "Enter the size of the peds in cm."
+    set pedSize to a number
+    WHILE pedSize is not a number
+      alert user to "Please enter a number."
+      prompt user with "Enter the size of the peds in cm."
+      set pedSize to a number
+    ENDWHILE
+    prompt user for pedStructure with "Enter the structure of the peds."
+  ENDFUNCTION
+  
+  create function soilDepthInformation
+    prompt user for soilDepth with "Enter the depth of the horizon in cm.
+    set soilDepth to a number
+    WHILE soilDepth is not a number
+      alert user to "Please enter a number."
+      prompt user for soilDepth with "Enter the depth of the horizon in cm.
+      set soilDepth to a number
+    ENDWHILE
+  ENDFUNCTION
+  
+  create function getLetter from horizons array
+    set horizonLetter to an array
+    FOR all letters in the horizons array
+      use horizonLetter from horizons array and push to horizons
+    ENDFOR
+    return horizonLetter
+  ENDFUNCTION
+
+  HASH horizons 
+    set horizonAssignment to horizonO, horizonA, horizonE, horizonB, horizonC, parentRock
+    set horizonLetter to "O", "A", "E, "B, "C", and "Parent Rock"
+  ENDHASH
+
+  FOR all letters in horizons
+    set horizonLetter to getLetter from horizons
+    prompt user for horizonLetter with "Is the " + horizonLetter[index] + 
+      " horizon present?\nPlease enter \"yes\" or \"no\".");
+    IF horizonLayer is "yes" or "y"
+      use soilDepthInformation function
+      prompt user for soilType with "Enter the soil type."
+      prompt user for peds with "Are peds present?\nPlease enter \"yes\" or \"no\"."
+      IF peds are "yes" or "y"
+        use pedInformation function
+      ELSE
+        alert the user "Thank you. Select \"OK\" to continue."
+      ENDIF
+      prompt user for soilColor with "Enter the soil color."
+      output for each loop (horizonLetter[index] + " Horizon: \n" + 
+               "\tHorizon Depth: " + soilDepth + " cm\n" +
+               "\tSoil Type: " + soilType + "\n" +
+               "\tSoil Color: " + soilColor + "\n" +
+               "\tPed Size: " + pedSize + " cm\n" +
+               "\tPed Structure: " + pedStructure + "\n\n");
+    ELSE
+      alert the user "Thank you. Select \"OK\" to continue."
+  ENDFOR
+END
+
+
+
+
+TEST PLANS:
+
+Variables: horizonLetter, horizonLayer, soilDepth, soilType, soilColor, peds, 
+  pedSize, pedStructure, profileDepth output
+
+Test Plan 1:
+
+  Inputs: yes, 10, sandy loam, reddish-yellow, yes, 1, blocky
+          yes, 15, loam, dark grey, yes, 1, prismatic 
+          yes, 34, clay loam, pale yellow, yes, 2, platy
+          yes, 22, clay, red, yes, 2, blocky 
+          yes, 13, sandy clay, grey, no 
+          yes, 56, sandstone, yellow, no
+
+  Expected Results:
+    O Horizon: 
+      Horizon Depth: 10 cm
+      Soil Type: sandy loam
+      Soil Color: reddish-yellow
+      Ped Size: 1 cm
+      Ped Structure: blocky
+
+    A Horizon: 
+      Horizon Depth: 15 cm
+      Soil Type: loam
+      Soil Color: dark grey
+      Ped Size: 1 cm
+      Ped Structure: prismatic
+
+    E Horizon: 
+      Horizon Depth: 34 cm
+      Soil Type: clay loam
+      Soil Color: pale yellow
+      Ped Size: 2 cm
+      Ped Structure: platy
+
+    B Horizon: 
+      Horizon Depth: 34 cm
+      Soil Type: clay
+      Soil Color: red
+      Ped Size: 2 cm
+      Ped Structure: blocky
+
+    C Horizon: 
+      Horizon Depth: 13 cm
+      Soil Type: sandy clay
+      Soil Color: grey
+      Ped Size: 0 cm
+      Ped Structure: Not present
+
+    Parent Rock Horizon: 
+      Horizon Depth: 56 cm
+      Soil Type: sandstone
+      Soil Color: yellow
+      Ped Size: 0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 150
+  
+  Actual Results:
+    O Horizon: 
+      Horizon Depth: 10 cm
+      Soil Type: sandy loam
+      Soil Color: reddish-yellow
+      Ped Size: 1 cm
+      Ped Structure: blocky
+
+    A Horizon: 
+      Horizon Depth: 15 cm
+      Soil Type: loam
+      Soil Color: dark grey
+      Ped Size: 1 cm
+      Ped Structure: prismatic
+
+    E Horizon: 
+      Horizon Depth: 34 cm
+      Soil Type: clay loam
+      Soil Color: pale yellow
+      Ped Size: 2 cm
+      Ped Structure: platy
+
+    B Horizon: 
+      Horizon Depth: 34 cm
+      Soil Type: clay
+      Soil Color: red
+      Ped Size: 2 cm
+      Ped Structure: blocky
+
+    C Horizon: 
+      Horizon Depth: 13 cm
+      Soil Type: sandy clay
+      Soil Color: grey
+      Ped Size: 0 cm
+      Ped Structure: Not present
+
+    Parent Rock Horizon: 
+      Horizon Depth: 56 cm
+      Soil Type: sandstone
+      Soil Color: yellow
+      Ped Size: 0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 150
+  
+Test Plan 2:
+
+  Inputs: yes, 3, sand, pale brown, no
+          no
+          YES, 34, clay loam, pale yellow, yes, 2, platy
+          no
+          yes, 13, sandy clay, pale yellow, no 
+          yes, 48, sandstone, white, no
+
+  Expected Results:
+    O Horizon: 
+      Horizon Depth: 3.0 cm
+      Soil Type: sand
+      Soil Color: pale brown
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    E Horizon: 
+      Horizon Depth: 34.0 cm
+      Soil Type: clay loam
+      Soil Color: pale yellow
+      Ped Size: 2.0 cm
+      Ped Structure: platy
+
+    C Horizon: 
+      Horizon Depth: 13.0 cm
+      Soil Type: sandy clay
+      Soil Color: pale yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    Parent Rock Horizon: 
+      Horizon Depth: 48.0 cm
+      Soil Type: granite
+      Soil Color: white
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 98.0
+      
+  Actual Results:
+    O Horizon: 
+      Horizon Depth: 3.0 cm
+      Soil Type: sand
+      Soil Color: pale brown
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    E Horizon: 
+      Horizon Depth: 34.0 cm
+      Soil Type: clay loam
+      Soil Color: pale yellow
+      Ped Size: 2.0 cm
+      Ped Structure: platy
+
+    C Horizon: 
+      Horizon Depth: 13.0 cm
+      Soil Type: sandy clay
+      Soil Color: pale yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    Parent Rock Horizon: 
+      Horizon Depth: 48.0 cm
+      Soil Type: granite
+      Soil Color: white
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 98.0
+
+  
+Test Plan 3:
+
+  Inputs: yes, ten/10, loam, reddish-yellow, no
+          yes, 15.6, clay loam, dark grey, yes, one/1.3, prismatic 
+          no
+          yes, 22.3, clay, reddish-yellow, yes, 2.1, blocky 
+          yes, 13.4, sand, yellow, no 
+          no
+
+  Expected Results:
+    O Horizon: 
+      Horizon Depth: 10.0 cm
+      Soil Type: loam
+      Soil Color: reddish-yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    A Horizon: 
+      Horizon Depth: 15.6 cm
+      Soil Type: clay loam
+      Soil Color: dark grey
+      Ped Size: 1.3 cm
+      Ped Structure: prismatic
+
+    B Horizon: 
+      Horizon Depth: 22.3 cm
+      Soil Type: clay
+      Soil Color: reddish-yellow
+      Ped Size: 2.1 cm
+      Ped Structure: blocky
+
+    C Horizon: 
+      Horizon Depth: 13.4 cm
+      Soil Type: sand
+      Soil Color: yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 61.3
+  
+  Actual Results:
+    O Horizon: 
+      Horizon Depth: 10.0 cm
+      Soil Type: loam
+      Soil Color: reddish-yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+
+    A Horizon: 
+      Horizon Depth: 15.6 cm
+      Soil Type: clay loam
+      Soil Color: dark grey
+      Ped Size: 1.3 cm
+      Ped Structure: prismatic
+
+    B Horizon: 
+      Horizon Depth: 22.3 cm
+      Soil Type: clay
+      Soil Color: reddish-yellow
+      Ped Size: 2.1 cm
+      Ped Structure: blocky
+
+    C Horizon: 
+      Horizon Depth: 13.4 cm
+      Soil Type: sand
+      Soil Color: yellow
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 61.3
+  
+Test Plan 4:
+
+  Inputs: no
+          no
+          no
+          YES, 38.0, clay loam, dark grey, no
+          no
+          no
+
+  Expected Results:
+    B Horizon: 
+      Horizon Depth: 38.0 cm
+      Soil Type: clay loam
+      Soil Color: dark grey
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 38.0
+  
+  Actual Results:
+    B Horizon: 
+      Horizon Depth: 38.0 cm
+      Soil Type: clay loam
+      Soil Color: dark grey
+      Ped Size: 0.0 cm
+      Ped Structure: Not present
+      
+      Soil Profile Depth: 38.0
+
+
+

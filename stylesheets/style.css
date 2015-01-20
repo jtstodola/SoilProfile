@@ -1,0 +1,28 @@
+body {
+  font: Arial;
+  background-image: linear-gradient(to bottom, #BABA86, #FAFAEB);
+  background-repeat: no-repeat;
+
+}
+
+header {
+  background-color: #FFF;
+  border: 1.5px solid #222;
+  border-radius: 10px;
+  box-shadow: 3px 3px #555;
+  text-align: center;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  background-color: #FFF;
+  border: 1.5px solid #222;
+  border-radius: 4px;
+  box-shadow: 2px 2px #555;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
+
